@@ -1,0 +1,35 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: {{ .Values.namespace }}-quote-web
+  namespace: {{ .Values.namespace }}
+  labels: 
+    app: {{ .Values.namespace }}-quote-web
+    tier: frontend 
+spec:
+  selector: 
+    matchLabels: 
+      app: {{ .Values.namespace }}-quote-web
+  template: 
+    metadata: 
+      name: {{ .Values.namespace }}-quote-web
+      labels: 
+        app: {{ .Values.namespace }}-quote-web
+        tier: frontend 
+      annotations:
+        jenkins/build: {{ (((.Values.metadata).jenkins).buildTag) | quote }}
+        git/commitId: {{ (((.Values.metadata).git).commitId) | quote }}
+    spec:
+      containers: 
+        - name: {{ .Values.namespace }}-quote-web
+          image: "{{ (((.Values.services).registry).uri) }}/maontech/reoda-dashboard:{{ ((.Values.deployment).tag) }}"
+          imagePullPolicy: Always
+          {{- if (((.Values.services).registry).secret) }}
+          imagePullSecrets:
+          - name: {{ .Values.services.registry.secret }}
+          {{- end }}
+          envFrom:
+          - configMapRef:
+              name: {{ .Values.namespace }}-config-quote-web
+          ports:
+          - containerPort: 80

@@ -1,0 +1,37 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: {{ .Values.namespace }}-api-gateway
+  namespace: {{ .Values.namespace }}
+  labels: 
+    app: {{ .Values.namespace }}-api-gateway
+    tier: api-gateway 
+spec:
+  selector: 
+    matchLabels: 
+      app: {{ .Values.namespace }}-api-gateway
+  template: 
+    metadata: 
+      name: {{ .Values.namespace }}-api-gateway
+      labels: 
+        app: {{ .Values.namespace }}-api-gateway
+        tier: api-gateway 
+      annotations:
+        jenkins/build: {{ (((.Values.metadata).jenkins).buildTag) | quote }}
+        git/commitId: {{ (((.Values.metadata).git).commitId) | quote }}
+    spec:
+      containers: 
+        - name: {{ .Values.namespace }}-api-gateway
+          image: "{{ (((.Values.services).registry).uri) }}/maontech/reoda-backend:{{ ((.Values.deployment).tag) }}"
+          imagePullPolicy: Always
+          envFrom:
+          - configMapRef:
+              name: {{ .Values.namespace }}-config-quote-api-gateway
+          - secretRef:
+                name: {{ .Values.namespace }}-secrets
+          {{- if (((.Values.services).registry).secret) }}
+          imagePullSecrets:
+          - name: {{ .Values.services.registry.secret }}
+          {{- end }}
+          ports:
+          - containerPort: 3000

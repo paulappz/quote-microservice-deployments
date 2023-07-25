@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.namespace }}-config-quote-web
+  namespace: {{ .Values.namespace }}
+  labels: 
+    app: {{ .Values.namespace }}-quote-web
+data:
+  QUOTES_API_GATEWAY : {{ .Values.backend.apiGatewayUrl }}
