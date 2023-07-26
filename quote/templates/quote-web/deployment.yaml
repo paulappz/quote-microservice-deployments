@@ -1,28 +1,28 @@
 apiVersion: apps/v1 
 kind: Deployment 
 metadata: 
-  name: {{ .Values.namespace }}-quote-web
+  name: {{ .Values.namespace }}-web
   namespace: {{ .Values.namespace }}
   labels: 
-    app: {{ .Values.namespace }}-quote-web
+    app: {{ .Values.namespace }}-web
     tier: frontend 
 spec:
   selector: 
     matchLabels: 
-      app: {{ .Values.namespace }}-quote-web
+      app: {{ .Values.namespace }}-web
   template: 
     metadata: 
-      name: {{ .Values.namespace }}-quote-web
+      name: {{ .Values.namespace }}-web
       labels: 
-        app: {{ .Values.namespace }}-quote-web
+        app: {{ .Values.namespace }}-web
         tier: frontend 
       annotations:
         jenkins/build: {{ (((.Values.metadata).jenkins).buildTag) | quote }}
         git/commitId: {{ (((.Values.metadata).git).commitId) | quote }}
     spec:
       containers: 
-        - name: {{ .Values.namespace }}-quote-web
-          image: "{{ (((.Values.services).registry).uri) }}/maontech/reoda-dashboard:{{ ((.Values.deployment).tag) }}"
+        - name: {{ .Values.namespace }}-web
+          image: "{{ (((.Values.services).registry).uri) }}/paulappz/quote-web:{{ ((.Values.deployment).tag) }}"
           imagePullPolicy: Always
           {{- if (((.Values.services).registry).secret) }}
           imagePullSecrets:

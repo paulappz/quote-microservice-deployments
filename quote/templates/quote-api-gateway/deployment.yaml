@@ -22,7 +22,7 @@ spec:
     spec:
       containers: 
         - name: {{ .Values.namespace }}-api-gateway
-          image: "{{ (((.Values.services).registry).uri) }}/maontech/reoda-backend:{{ ((.Values.deployment).tag) }}"
+          image: "{{ (((.Values.services).registry).uri) }}/paulappz/quote-api-gateway:{{ ((.Values.deployment).tag) }}"
           imagePullPolicy: Always
           envFrom:
           - configMapRef:
@@ -34,4 +34,4 @@ spec:
           - name: {{ .Values.services.registry.secret }}
           {{- end }}
           ports:
-          - containerPort: 3000
+          - containerPort: 7000

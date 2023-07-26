@@ -1,28 +1,28 @@
 apiVersion: apps/v1 
 kind: Deployment 
 metadata: 
-  name: {{ .Values.namespace }}-quote-service
+  name: {{ .Values.namespace }}-service
   namespace: {{ .Values.namespace }}
   labels: 
-    app: {{ .Values.namespace }}-quote-service
+    app: {{ .Values.namespace }}-service
     tier: api-gateway 
 spec:
   selector: 
     matchLabels: 
-      app: {{ .Values.namespace }}-quote-service
+      app: {{ .Values.namespace }}-service
   template: 
     metadata: 
-      name: {{ .Values.namespace }}-quote-service
+      name: {{ .Values.namespace }}-service
       labels: 
-        app: {{ .Values.namespace }}-quote-service
+        app: {{ .Values.namespace }}-service
         tier: quote-service 
       annotations:
         jenkins/build: {{ (((.Values.metadata).jenkins).buildTag) | quote }}
         git/commitId: {{ (((.Values.metadata).git).commitId) | quote }}
     spec:
       containers: 
-        - name: {{ .Values.namespace }}-quote-service
-          image: "{{ (((.Values.services).registry).uri) }}/maontech/reoda-backend:{{ ((.Values.deployment).tag) }}"
+        - name: {{ .Values.namespace }}-service
+          image: "{{ (((.Values.services).registry).uri) }}/paulappz/quote-service:{{ ((.Values.deployment).tag) }}"
           imagePullPolicy: Always
           envFrom:
           - secretRef:

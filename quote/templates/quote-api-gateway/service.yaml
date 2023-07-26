@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.namespace }}-quote-service
+  name: {{ .Values.namespace }}-api-gateway
   namespace: {{ .Values.namespace }}
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
@@ -13,12 +13,12 @@ spec:
   ports:
     - name: http
       port: 80
-      targetPort: 9000
+      targetPort: 7000
     {{- if (((.Values.deployment).https).ssl) }}
     - name: https
       port: 443
-      targetPort: 9000
+      targetPort: 7000
     {{- end }}
   type: LoadBalancer
   selector:
-    app: {{ .Values.namespace }}-quote-service
+    app: {{ .Values.namespace }}-api-gateway

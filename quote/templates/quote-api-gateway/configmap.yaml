@@ -6,5 +6,5 @@ metadata:
   labels: 
     app: {{ .Values.namespace }}-api-gateway
 data:
-  QUOTES_API: {{ .Values.service.quoteServiceUrl }}}
+  QUOTES_API: {{ .Values.services.quoteServiceUrl }}
   
