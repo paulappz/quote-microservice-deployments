@@ -11,11 +11,11 @@ node('master'){
     }
 
     stage('Deploy'){
-     //  sh """
-     //       helm upgrade --install reoda ./reoda  \
-     //           --set metadata.jenkins.buildTag=${env.BUILD_TAG} \
-     //           --set metadata.git.commitId=${getCommitId()}
-     //   """
+        sh """
+           helm upgrade --install quote ./quote  \
+                --set metadata.jenkins.buildTag=${env.BUILD_TAG} \
+                --set metadata.git.commitId=${getCommitId()}
+        """
     }
 }
 
