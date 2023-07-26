@@ -1,0 +1,27 @@
+namespace: 'quote'
+environment: 'sandbox'
+
+metadata: 
+  git:
+    commitId: none
+  jenkins:
+    buildTag: none
+
+services:
+  aws:
+    account: ''
+    region: 'eu-west-2'
+  registry:
+    uri: ''
+    secret: ''
+  quoteServiceUrl: ''
+
+backend:
+  apiGatewayUrl: ''
+
+deployment:
+  tag: 'develop'
+  workers:
+    replicas: 5
+  https:
+    ssl: ''
