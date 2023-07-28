@@ -1,4 +1,4 @@
-def region = 'eu-west-2'
+def regions = [master:'eu-west-1', preprod:'eu-west-1', develop: 'eu-west-2']
 def accounts = [master:'production', preprod:'staging', develop:'sandbox']
 
 node('master'){
@@ -7,7 +7,8 @@ node('master'){
     }
 
     stage('Authentication'){
-        sh "aws eks update-kubeconfig --name ${accounts[env.BRANCH_NAME]} --region ${region}"
+    ifif (env.BRANCH_NAME == 'develop') {
+        sh "aws eks update-kubeconfig --name ${accounts[env.BRANCH_NAME]} --region ${regions[env.BRANCH_NAME]}"
     }
 
     stage('Deploy'){

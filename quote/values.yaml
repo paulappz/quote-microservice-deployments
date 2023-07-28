@@ -1,5 +1,5 @@
 namespace: 'quote'
-environment: 'sandbox'
+environment: 'staging'
 
 metadata: 
   git:
@@ -20,7 +20,7 @@ backend:
   apiGatewayUrl: 'xxx.com'
 
 deployment:
-  tag: 'develop'
+  tag: 'staging'
   workers:
     replicas: 3 
   https:
