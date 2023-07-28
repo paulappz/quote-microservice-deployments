@@ -7,7 +7,6 @@ node('master'){
     }
 
     stage('Authentication'){
-    ifif (env.BRANCH_NAME == 'develop') {
         sh "aws eks update-kubeconfig --name ${accounts[env.BRANCH_NAME]} --region ${regions[env.BRANCH_NAME]}"
     }
 
