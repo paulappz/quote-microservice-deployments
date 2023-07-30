@@ -9,10 +9,10 @@ metadata:
 
 services:
   aws:
-    account: ''
+    account: '570942461061'
     region: 'eu-west-2'
   registry:
-    uri: ''
+    uri: '570942461061.dkr.ecr.eu-west-2.amazonaws.com'
     secret: ''
   quoteServiceUrl: 'yyy.com'
 
@@ -20,8 +20,8 @@ backend:
   apiGatewayUrl: 'xxx.com'
 
 deployment:
-  tag: 'staging'
+  tag: 'preprod'
   workers:
-    replicas: 3 
+    replicas: 2
   https:
-    ssl: ''
+    ssl: 'ae6c2177-2de9-48f0-80ad-fe2542867d46'
