@@ -32,4 +32,5 @@ spec:
           - name: {{ .Values.services.registry.secret }}
           {{- end }}
           ports:
-          - containerPort: 9000
+          - name: service-port
+            containerPort: 9000

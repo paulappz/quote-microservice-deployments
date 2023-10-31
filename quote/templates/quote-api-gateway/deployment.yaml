@@ -34,4 +34,5 @@ spec:
           - name: {{ .Values.services.registry.secret }}
           {{- end }}
           ports:
-          - containerPort: 7000
+          - name: api-port
+            containerPort: 7000

@@ -14,10 +14,10 @@ services:
   registry:
     uri: '570942461061.dkr.ecr.eu-west-2.amazonaws.com'
     secret: ''
-  quoteServiceUrl: 'yyy.com'
+  quoteServiceUrl: 'https://quote.maontechnology.com/service'
 
 backend:
-  apiGatewayUrl: 'xxx.com'
+  apiGatewayUrl: 'https://quote.maontechnology.com/api'
 
 deployment:
   tag: 'develop'
